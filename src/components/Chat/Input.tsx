@@ -38,16 +38,23 @@ export default function Input(props: InputProps) {
     }
 
     return(
-        <div className="flex items-center w-full h-14 bg-gray-200">
-            <input 
-                ref={props.MessageInput} 
-                onFocus={() => handleOnFocusIn()} 
-                onBlur={() => handleOnFocusOut()}
-                onChange={(e) => handleOnChangeMessage(e.target.value)} 
-                className="w-3/4 px-2 m-4 h-8">
-            </input>
-            <div className="h-full grow">
-                <button onClick={handleSendMessage} className='h-full w-full bg-lime-300 self-end hover:bg-lime-400 active:bg-lime-500'>Send</button>
+        <div className="flex items-center w-full h-18 p-6 gap-2">
+            <div className="w-[85%] md:w-[90%]">
+                <input 
+                    ref={props.MessageInput} 
+                    onFocus={() => handleOnFocusIn()} 
+                    onBlur={() => handleOnFocusOut()}
+                    onChange={(e) => handleOnChangeMessage(e.target.value)} 
+                    onKeyUp={(e) => {
+                        if(e.key === "Enter"){
+                            handleSendMessage()
+                        }
+                    }}
+                    className="w-full h-10 rounded-md px-2">
+                </input>
+            </div>
+            <div className="flex items-center h-full grow">
+                <button onClick={handleSendMessage} className='w-full h-full font-semibold bg-sky-300 rounded-md bg-opacity-60 backdrop-blur-lg self-end hover:bg-opacity-60 hover:bg-sky-400 active:bg-opacity-60 active:bg-sky-500 transition-all duration-300'>Send</button>
             </div>
         </div>
     )
